@@ -33,13 +33,26 @@ const formReducer = (state, action) => {
       return state;
   }
 };
-const useForm = (initialInputs, initialFormValidity) => {
+
+
+interface initialInputs {
+  email: {
+    value: string,
+    isValid: boolean
+  },
+  password: {
+    value: string,
+    isValid: boolean
+  }
+}
+
+const useForm = (initialInputs: initialInputs, initialFormValidity: boolean) => {
   const [formState, dispatch] = useReducer(formReducer, {
     inputs: initialInputs,
     isValid: initialFormValidity,
   });
 
-  const inputHandler = useCallback((id, value, isValid) => {
+  const inputHandler:any = useCallback((id:number, value:number|string, isValid:boolean) => {
     dispatch({
       type: "INPUT_CHANGE",
       value: value,
@@ -48,7 +61,7 @@ const useForm = (initialInputs, initialFormValidity) => {
     });
   }, []);
 
-  const setFormData = useCallback((inputData, formValidity) => {
+  const setFormData = useCallback((inputData:initialInputs, formValidity:boolean) => {
     dispatch({
       type: "SET_DATA",
       inputs: inputData,

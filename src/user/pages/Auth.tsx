@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FormEvent } from "react";
 import Input from "../../shared/components/FormElements/Input";
 import useForm from "../../shared/hooks/useForm";
 import { VALIDATOR_EMAIL, VALIDATOR_MINLENGTH, VALIDATOR_REQUIRE } from "../../shared/utils/validators";
@@ -9,9 +9,9 @@ import { useContext, useState } from "react";
 import "./Auth.css";
 import { AuthContext } from "../../shared/context/auth-context";
 
-const Auth = () => {
+const Auth: React.FC = () => {
   const auth = useContext(AuthContext);
-  const [isLoginMode, setIsLoginMode] = useState(true);
+  const [isLoginMode, setIsLoginMode] = useState<boolean>(true);
   const [formState, inputHandler, setFormData] = useForm(
     {
       email: {
@@ -26,7 +26,7 @@ const Auth = () => {
     false,
   );
 
-  const authSubmitHandler = (event) => {
+  const authSubmitHandler = (event:FormEvent) => {
     event.preventDefault();
     console.log(formState.inputs);
     auth.login();
